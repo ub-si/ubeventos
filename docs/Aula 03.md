@@ -1,11 +1,11 @@
-# AUla 03 - Criação de Classes
+# Aula 03 - Criação de Classes
 Aqui faremos a criação das migrations, Models, Controllers, Requests e Resources
 
 ## Criação da das Migration
 Note que na criação da migration o nome "events" refere-se ao nome da tabela
 a ser criada no banco de dados.
 O comando a seguir cria uma migration:
-`make:migration events --table=events`
+`php artisan make:migration events --table=events`
 
 Verifique a forma alternativa de criação da migration na criação do Model a seguir
 
@@ -21,12 +21,12 @@ aqui o nome "Event" refere-se à classe (model):
 A criação do controller pode ser feita com algumas variações:
 - Controller normal:
 `php artisan make:controller EventController`
-- Controller Resource (cria automaticamete todas as funções):
+- Controller Resource (cria automaticamente todas as funções):
 `php artisan make:controller EventController --resource`
 - Controller API (Cria as funções apenas para api, não cria index, create e edit):
 `php artisan make:controller EventController --api`
 
-Com a criação do controller pode se criar sua Request automáticamente com o comando a seguir:
+Com a criação do controller pode se criar sua Request automaticamente com o comando a seguir:
 `php artisan make:controller EventController --resource --requests`
 
 ## Criação da Request
