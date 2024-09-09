@@ -25,7 +25,7 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('event_speakers', function (Blueprint $table) {
+        Schema::create('events_speakers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
@@ -38,7 +38,7 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('event_participants', function (Blueprint $table) {
+        Schema::create('events_participants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
@@ -58,8 +58,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_speakers');
-        Schema::dropIfExists('event_participants');
+        Schema::dropIfExists('events_speakers');
+        Schema::dropIfExists('events_participants');
         Schema::dropIfExists('events');
     }
 };
