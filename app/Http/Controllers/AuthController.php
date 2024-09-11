@@ -36,30 +36,32 @@ class AuthController extends Controller
         return $resource->response()->setStatusCode(201);
     }
 
-    public function addRole(Request $request)
+    public function addRole(string $id, Request $request)
     {
         $data = $request->validate([
-            'id' => 'required',
-            'role_id' => 'required',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
-        $user = User::find($data['id']);
+        $user = User::find($id);
         if($user) {
             $user->addRole($data['role_id']);
+            return new UserResource($user);
         }
+        return response(['error' => 'Usuário não encontrado.'], 404);
     }
 
-    public function removeRole(Request $request)
+    public function removeRole(string $id, Request $request)
     {
         $data = $request->validate([
-            'id' => 'required',
-            'role_id' => 'required',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
-        $user = User::find($data['id']);
+        $user = User::find($id);
         if($user) {
             $user->removeRole($data['role_id']);
+            return new UserResource($user);
         }
+        return response(['error' => 'Usuário não encontrado.'], 404);
     }
 
     public function login(LoginRequest $request)
