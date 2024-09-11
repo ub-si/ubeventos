@@ -36,7 +36,7 @@ class Event extends Model
 
     public function addSpeaker($id)
     {
-        $this->speakers()->attach($id);
+        $this->speakers()->syncWithoutDetaching([$id]);
     }
 
     public function removeSpeaker($id)
@@ -51,7 +51,7 @@ class Event extends Model
 
     public function addParticipant($id)
     {
-        $this->participants()->attach($id);
+        $this->participants()->syncWithoutDetaching([$id]);
     }
 
     public function removeParticipant($id)

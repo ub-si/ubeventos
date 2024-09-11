@@ -55,10 +55,11 @@ class User extends Authenticatable
 
     public function addRole($id)
     {
-        $this->roles()->attach($id);
+        // Previne a repetição
+        $this->roles()->syncWithoutDetaching([$id]);
     }
 
-    public function removeRoles($id)
+    public function removeRole($id)
     {
         $this->roles()->detach($id);
     }
