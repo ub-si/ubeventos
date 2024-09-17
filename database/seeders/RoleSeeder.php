@@ -17,5 +17,7 @@ class RoleSeeder extends Seeder
             ['id' => 2, 'title' => 'Palestrante'],
             ['id' => 3, 'title' => 'Participante'],
         ]);
+
+        // Role::create(['id' => 1, 'title' => 'Administrador']);
     }
 }
