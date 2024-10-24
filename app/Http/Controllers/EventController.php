@@ -7,7 +7,9 @@ use App\Http\Resources\EventResource;
 use App\Http\Resources\UserResource;
 use App\Models\Event;
 use App\Models\User;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -44,6 +46,10 @@ class EventController extends Controller
         /** @var User $user */
         $user = Auth()->user();
         $data['created_by'] = $user->id;
+
+        if ($request->photo) {
+            $data['photo_path'] = $request->photo->store('event-photos', 'public');
+        }
 
         $event = $this->event->create($data);
 
@@ -145,7 +151,12 @@ class EventController extends Controller
     {
         $event = $this->event->find($id);
         if ($event) {
-            $event->update($request->all());
+            $data = $request->all();
+            if ($request->photo) {
+                Storage::disk('public')->delete($event->photo_path);
+                $data['photo_path'] = $request->photo->store('event-photos', 'public');
+            }
+            $event->update($data);
             return new EventResource($event);
         }
         return response()->json(['error' => '404 Not Found'], 404);
@@ -158,6 +169,7 @@ class EventController extends Controller
     {
         $event = $this->event->find($id);
         if ($event) {
+            Storage::disk('public')->delete($event->photo_path);
             $event->delete();
             return response()->json([], 204);
         }

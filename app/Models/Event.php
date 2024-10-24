@@ -16,7 +16,8 @@ class Event extends Model
         'start_date',
         'end_date',
         'local',
-        'workload'
+        'workload',
+        'photo_path',
     ];
 
     public function createdBy()

@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->date('end_date');
             $table->string('local');
             $table->decimal('workload');
+            $table->text('photo_path')->nullable();
             $table->timestamps();
         });
 

@@ -23,6 +23,7 @@ class EventResource extends JsonResource
             'end_date' => $this->end_date,
             'local' => $this->local,
             'workload' => $this->workload,
+            'photo_path' => $this->photo_path,
         ];
     }
 }
